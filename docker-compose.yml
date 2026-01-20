@@ -10,7 +10,7 @@ services:
     env_file:
       - ./backend/.env.deploy
     depends_on:
-      - postgres
+      - database
     ports:
       - '4000:4000'
     restart: on-failure
@@ -25,10 +25,11 @@ services:
     image: frontend
     ports:
       - '8081:80'
+    restart: always
     networks:
       - frontend
 
-  postgres:
+  database:
     container_name: postgres
     image: 'postgres:16-alpine'
     env_file:
